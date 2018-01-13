@@ -41,7 +41,7 @@ public class AboutActivity extends AppCompatActivity {
         personils.add(new Personil(R.drawable.mukhlis, "Ahmad Mukhlis S.", "Android developer"));
         personils.add(new Personil(R.drawable.kevin, "Kevin Arden Islamey", "Web Developer"));
         personils.add(new Personil(R.drawable.geri, "Geri Fitrah R. R.", "Web Developer"));
-        personils.add(new Personil(R.drawable.detail, "Richard Handerson", "System Analyst"));
+        personils.add(new Personil(R.drawable.richard, "Richard Handerson", "System Analyst"));
 
 
 

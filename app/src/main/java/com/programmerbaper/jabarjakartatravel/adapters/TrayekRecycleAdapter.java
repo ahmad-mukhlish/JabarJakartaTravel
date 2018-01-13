@@ -3,8 +3,6 @@ package com.programmerbaper.jabarjakartatravel.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +61,7 @@ public class TrayekRecycleAdapter extends RecyclerView.Adapter<TrayekRecycleAdap
 
         public TrayekViewHolder(View itemView) {
             super(itemView);
-            mNama = itemView.findViewById(R.id.nama);
+            mNama = itemView.findViewById(R.id.jam6);
             mTarif = itemView.findViewById(R.id.tarif);
             mTanggal = itemView.findViewById(R.id.tanggal);
             mRootView = itemView;

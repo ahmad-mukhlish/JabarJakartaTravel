@@ -11,5 +11,6 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilih_waktu_kursi);
+        setTitle("Waktu Keberangkatan");
     }
 }
