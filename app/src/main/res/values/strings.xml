@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Jabar Jakarta Travel</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab_pergi">Pergi</string>
     <string name="tab_pulang">Pulang</string>
+
+    <string name="label_no_internet_connection">No Internet Connection..</string>
 </resources>
