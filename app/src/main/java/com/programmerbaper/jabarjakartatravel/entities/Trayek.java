@@ -16,6 +16,9 @@ public class Trayek implements Parcelable {
     private String mNama;
     private int mTarif;
 
+    public static final String BASE_PATH = "http://192.168.1.3/travel/";
+    public static final String JSON_TRAYEK = "server.php?operasi=trayek";
+
 
     public Trayek(int mIdTrayek, String mNama, int mTarif) {
         this.mIdTrayek = mIdTrayek;
