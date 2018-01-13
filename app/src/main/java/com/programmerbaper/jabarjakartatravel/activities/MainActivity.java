@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public static List<Trayek> mTrayek;
     private static final int LOADER_ID = 54;
+    private LinearLayout mLoading;
 
 
     @Override
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         LinearLayout error = findViewById(R.id.error);
         error.setVisibility(View.GONE);
+
+        mLoading = findViewById(R.id.loading);
 
 
         if (isConnected) {
@@ -71,13 +75,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Trayek>> loader, List<Trayek> data) {
+    public void onLoadFinished(Loader<List<Trayek>> loader, final List<Trayek> data) {
 
         if (mTrayek == null || mTrayek.isEmpty()) {
             mTrayek = data;
         }
 
-        updateUI(data);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateUI(data);
+            }
+        }, 3000);
+
 
 
     }
@@ -88,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void updateUI(List<Trayek> list) {
+        mLoading.setVisibility(View.GONE);
         ViewPager viewPager = findViewById(R.id.viewpager);
         TrayekTabAdapter adapter = new TrayekTabAdapter(getSupportFragmentManager(), setTabTitle(), list);
         viewPager.setAdapter(adapter);
