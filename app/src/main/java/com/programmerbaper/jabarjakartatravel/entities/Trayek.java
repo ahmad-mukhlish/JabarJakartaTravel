@@ -16,6 +16,7 @@ public class Trayek implements Parcelable {
     private String mNama;
     private int mTarif;
 
+    //TODO the link should be understood by the Lecture
     public static final String BASE_PATH = "http://192.168.1.3/travel/";
     public static final String JSON_TRAYEK = "server.php?operasi=trayek";
     public static final String JSON_WAKTU = "server.php?operasi=pilih_waktu&kode_trayek=";

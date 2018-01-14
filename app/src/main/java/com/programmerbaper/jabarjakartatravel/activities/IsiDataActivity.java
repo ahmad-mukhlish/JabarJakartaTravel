@@ -19,7 +19,7 @@ public class IsiDataActivity extends AppCompatActivity {
 
     private Trayek mChosenTrayek;
     private int mJumlahKursi, mDiambil = 1;
-    private String mWaktu;
+    private String mWaktu, mNama, mKtp, mTelp, mRekening;
     private boolean mBack = false;
 
     @Override
@@ -70,13 +70,13 @@ public class IsiDataActivity extends AppCompatActivity {
         });
 
         final EditText nama = findViewById(R.id.nama);
-        final EditText nomor_ktp = findViewById(R.id.ktp);
+        final EditText nomorKtp = findViewById(R.id.ktp);
 
 
         final MaskedTextChangedListener ktpListener = new MaskedTextChangedListener(
                 "[0000]-[0000]-[0000]-[0000]",
                 true,
-                nomor_ktp,
+                nomorKtp,
                 null,
                 new MaskedTextChangedListener.ValueListener() {
                     @Override
@@ -87,15 +87,15 @@ public class IsiDataActivity extends AppCompatActivity {
                 }
         );
 
-        nomor_ktp.addTextChangedListener(ktpListener);
-        nomor_ktp.setOnFocusChangeListener(ktpListener);
+        nomorKtp.addTextChangedListener(ktpListener);
+        nomorKtp.setOnFocusChangeListener(ktpListener);
 
-        final EditText nomor_telp = findViewById(R.id.telp);
+        final EditText nomorTelp = findViewById(R.id.telp);
 
         final MaskedTextChangedListener telpListener = new MaskedTextChangedListener(
-                "+62 [0000]-[0000]-[0000]",
+                "+62[000]-[0000]-[00000]",
                 true,
-                nomor_telp,
+                nomorTelp,
                 null,
                 new MaskedTextChangedListener.ValueListener() {
                     @Override
@@ -106,15 +106,15 @@ public class IsiDataActivity extends AppCompatActivity {
                 }
         );
 
-        nomor_telp.addTextChangedListener(telpListener);
-        nomor_telp.setOnFocusChangeListener(telpListener);
+        nomorTelp.addTextChangedListener(telpListener);
+        nomorTelp.setOnFocusChangeListener(telpListener);
 
 
-        final EditText nomor_rek = findViewById(R.id.rekening);
+        final EditText nomorRek = findViewById(R.id.rekening);
         final MaskedTextChangedListener rekListener = new MaskedTextChangedListener(
                 "[0000]-[0000]-[00000]",
                 true,
-                nomor_rek,
+                nomorRek,
                 null,
                 new MaskedTextChangedListener.ValueListener() {
                     @Override
@@ -125,19 +125,29 @@ public class IsiDataActivity extends AppCompatActivity {
                 }
         );
 
-        nomor_rek.addTextChangedListener(rekListener);
-        nomor_rek.setOnFocusChangeListener(rekListener);
+        nomorRek.addTextChangedListener(rekListener);
+        nomorRek.setOnFocusChangeListener(rekListener);
 
 
         Button pesan = findViewById(R.id.pesan);
         pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!(nama.getText().toString().isEmpty() || nomor_ktp.getText().toString().isEmpty()
-                        || nomor_telp.getText().toString().isEmpty() || nomor_rek.getText().toString().isEmpty())) {
-                    //TODO POST THE DATA TO THE DATABASE HERE
+
+                mNama = nama.getText().toString();
+                mKtp = unmask(nomorKtp.getText().toString());
+                mTelp = unmask(nomorTelp.getText().toString());
+                mRekening = unmask(nomorRek.getText().toString());
+
+                if (!(mNama.isEmpty() || mKtp.length() != 16
+                        || mTelp.length() < 14 || mRekening.length() < 8)) {
+
+                    //TODO SEND THE DATA TO DATABASE HERE
+                    Toast.makeText(getBaseContext(), "Sip...", Toast.LENGTH_SHORT).show();
+
+
                 } else {
-                    Toast.makeText(getBaseContext(), "Masih ada field yang kosong...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Masih ada field yang belum valid...", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -151,6 +161,19 @@ public class IsiDataActivity extends AppCompatActivity {
         mWaktu = bundle.getString("waktu");
         mJumlahKursi = bundle.getInt("kursi");
 
+    }
+
+    private String unmask(String input) {
+
+        String hasil = "";
+        String[] splits = input.split("-");
+        for (String splitsNow : splits) {
+
+            hasil += splitsNow;
+
+        }
+
+        return hasil;
     }
 
     @Override
