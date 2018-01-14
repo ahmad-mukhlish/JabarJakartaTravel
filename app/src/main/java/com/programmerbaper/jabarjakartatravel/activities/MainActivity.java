@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,7 +27,13 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.programmerbaper.jabarjakartatravel.R;
 import com.programmerbaper.jabarjakartatravel.adapters.TrayekTabAdapter;
 import com.programmerbaper.jabarjakartatravel.entities.Trayek;
+import com.programmerbaper.jabarjakartatravel.entities.Waktu;
+import com.programmerbaper.jabarjakartatravel.networking.QueryUtils;
 import com.programmerbaper.jabarjakartatravel.networking.TrayekLoader;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -176,5 +184,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         else
             Toast.makeText(this, R.string.toast_main_menu, Toast.LENGTH_SHORT).show();
     }
+
 
 }

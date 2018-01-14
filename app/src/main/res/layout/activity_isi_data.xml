@@ -269,7 +269,8 @@
         android:elevation="8dp"
         android:text="@string/button_pesan"
         android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="gone" />
 
 
 </LinearLayout>

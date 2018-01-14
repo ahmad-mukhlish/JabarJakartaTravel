@@ -1,5 +1,7 @@
 package com.programmerbaper.jabarjakartatravel.activities;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,22 +15,36 @@ import android.widget.Toast;
 import com.programmerbaper.jabarjakartatravel.R;
 import com.programmerbaper.jabarjakartatravel.adapters.TrayekRecycleAdapter;
 import com.programmerbaper.jabarjakartatravel.entities.Trayek;
+import com.programmerbaper.jabarjakartatravel.entities.Waktu;
+import com.programmerbaper.jabarjakartatravel.networking.QueryUtils;
 import com.redmadrobot.inputmask.MaskedTextChangedListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class IsiDataActivity extends AppCompatActivity {
 
+    private String LOG_TAG = IsiDataActivity.class.getName();
     private Trayek mChosenTrayek;
-    private int mJumlahKursi, mDiambil = 1;
+    private int mJumlahKursi, mDiambil = 1, mJadwal;
     private String mWaktu, mNama, mKtp, mTelp, mRekening;
     private boolean mBack = false;
+    private Button mPesan;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_isi_data);
 
+
         getBundle();
         setTitle("Isi Data Transaksi");
+
+        new JadwalAsyncTask().execute(Trayek.BASE_PATH + Trayek.JSON_JADWAL1 + mChosenTrayek.getmIdTrayek()
+                + Trayek.JSON_JADWAL2 + mWaktu);
+
 
         TextView trayek = findViewById(R.id.trayek);
         trayek.setText(mChosenTrayek.getmNama());
@@ -129,8 +145,8 @@ public class IsiDataActivity extends AppCompatActivity {
         nomorRek.setOnFocusChangeListener(rekListener);
 
 
-        Button pesan = findViewById(R.id.pesan);
-        pesan.setOnClickListener(new View.OnClickListener() {
+        mPesan = findViewById(R.id.pesan);
+        mPesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -186,4 +202,43 @@ public class IsiDataActivity extends AppCompatActivity {
 
 
     }
+
+
+    private class JadwalAsyncTask extends AsyncTask<String, Void, String> {
+
+
+        public JadwalAsyncTask() {
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+
+
+            try {
+                JSONArray rootArray = new JSONArray(QueryUtils.fetchResponse(urls[0]));
+                for (int i = 0; i < rootArray.length(); i++) {
+                    JSONObject object = rootArray.getJSONObject(i);
+                    mJadwal = object.getInt("id_jadwal");
+                }
+
+            } catch (JSONException e) {
+                Log.e(LOG_TAG, "Problem parsing the JSON results", e);
+            }
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String response) {
+            mPesan.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+
 }
