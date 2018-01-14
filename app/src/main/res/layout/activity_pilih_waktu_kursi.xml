@@ -25,8 +25,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="20dp"
+                android:orientation="vertical"
                 android:padding="10dp">
 
                 <ImageView
@@ -40,17 +40,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="06:00"
-                    android:textSize="15sp"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="15sp" />
+
+                <ProgressBar
+                    android:id="@+id/loading6"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:elevation="4dp" />
 
                 <TextView
+                    android:id="@+id/kursi6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="12 Kursi Tersedia"
-                    android:textSize="14sp"
+                    android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textAlignment="center" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -69,8 +79,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="20dp"
+                android:orientation="vertical"
                 android:padding="10dp">
 
                 <ImageView
@@ -84,17 +94,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="10:00"
-                    android:textSize="15sp"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="15sp" />
+
+                <ProgressBar
+                    android:id="@+id/loading10"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:elevation="4dp" />
 
                 <TextView
+                    android:id="@+id/kursi10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="12 Kursi Tersedia"
-                    android:textSize="14sp"
+                    android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textAlignment="center" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -120,8 +140,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="20dp"
+                android:orientation="vertical"
                 android:padding="10dp">
 
                 <ImageView
@@ -135,17 +155,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="14:00"
-                    android:textSize="15sp"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="15sp" />
+
+                <ProgressBar
+                    android:id="@+id/loading2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:elevation="4dp" />
 
                 <TextView
+                    android:id="@+id/kursi2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="12 Kursi Tersedia"
-                    android:textSize="14sp"
+                    android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textAlignment="center" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -163,8 +193,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="20dp"
+                android:orientation="vertical"
                 android:padding="10dp">
 
                 <ImageView
@@ -178,17 +208,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="18:30"
-                    android:textSize="15sp"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="15sp" />
+
+                <ProgressBar
+                    android:id="@+id/loading630"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:elevation="4dp" />
 
                 <TextView
+                    android:id="@+id/kursi630"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="12 Kursi Tersedia"
-                    android:textSize="14sp"
+                    android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textAlignment="center" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>

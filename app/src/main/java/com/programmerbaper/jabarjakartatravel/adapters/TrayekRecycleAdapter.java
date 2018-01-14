@@ -3,6 +3,7 @@ package com.programmerbaper.jabarjakartatravel.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,8 +85,7 @@ public class TrayekRecycleAdapter extends RecyclerView.Adapter<TrayekRecycleAdap
             Trayek clickedTrayek = mTrayeks.get(mPosition);
             Intent intent = new Intent(mContext, PilihWaktuKursiActivity.class);
             intent.putExtra("idTrayek", clickedTrayek.getmIdTrayek());
-            intent.putExtra("nama", clickedTrayek.getmNama());
-            intent.putExtra("tarif", clickedTrayek.getmTarif());
+            Log.v("cik",clickedTrayek.getmIdTrayek()+"") ;
             view.getContext().startActivity(intent);
 
         }
