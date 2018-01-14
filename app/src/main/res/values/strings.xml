@@ -21,4 +21,5 @@
     <string name="hint_nomor_rekening">Nomor Rekening</string>
     <string name="tanda_minus">-</string>
     <string name="tanda_plus">+</string>
+    <string name="button_pesan">Pesan</string>
 </resources>
