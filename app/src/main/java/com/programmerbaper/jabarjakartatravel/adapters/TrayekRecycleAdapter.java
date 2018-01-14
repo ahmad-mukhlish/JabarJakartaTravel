@@ -29,6 +29,7 @@ public class TrayekRecycleAdapter extends RecyclerView.Adapter<TrayekRecycleAdap
 
     private Context mContext;
     private List<Trayek> mTrayeks;
+    public static String mTanggal;
 
     public TrayekRecycleAdapter(Context mContext, List<Trayek> mTrayeks) {
         this.mContext = mContext;
@@ -45,8 +46,11 @@ public class TrayekRecycleAdapter extends RecyclerView.Adapter<TrayekRecycleAdap
     public void onBindViewHolder(TrayekViewHolder holder, int position) {
         Trayek trayekNow = mTrayeks.get(position);
         holder.mNama.setText(trayekNow.getmNama());
-        holder.mTanggal.setText(new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("in", "ID")).format(DateUtil(Calendar.getInstance().getTime(),1)));
-        holder.mTarif.setText(Trayek.formatter(trayekNow.getmTarif()+""));
+
+        mTanggal = new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("in", "ID")).format(DateUtil(Calendar.getInstance().getTime(), 1));
+        holder.mTanggal.setText(mTanggal);
+
+        holder.mTarif.setText(Trayek.formatter(trayekNow.getmTarif() + ""));
         holder.mRootView.setOnClickListener(new DetailListener(position));
 
     }
@@ -81,10 +85,9 @@ public class TrayekRecycleAdapter extends RecyclerView.Adapter<TrayekRecycleAdap
         @Override
         public void onClick(View view) {
 
-
             Trayek clickedTrayek = mTrayeks.get(mPosition);
             Intent intent = new Intent(mContext, PilihWaktuKursiActivity.class);
-            intent.putExtra("idTrayek", clickedTrayek.getmIdTrayek());
+            intent.putExtra("trayek", clickedTrayek);
             view.getContext().startActivity(intent);
 
         }
@@ -93,7 +96,7 @@ public class TrayekRecycleAdapter extends RecyclerView.Adapter<TrayekRecycleAdap
     private Date DateUtil(Date date, int days) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(Calendar.DATE, days); //minus number would decrement the days
+        cal.add(Calendar.DATE, days);
         return cal.getTime();
     }
 

@@ -29,8 +29,7 @@
             android:name=".activities.AboutActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.IsiDataActivity"
-            android:parentActivityName=".activities.PilihWaktuKursiActivity" />
+            android:name=".activities.IsiDataActivity" />
     </application>
 
 </manifest>

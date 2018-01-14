@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 public class PilihWaktuKursiActivity extends AppCompatActivity {
 
-    private int mIdTrayek;
+    private Trayek mChosenTrayek;
     private Waktu[] mWaktus;
     private String LOG_TAG = PilihWaktuKursiActivity.class.getName();
 
@@ -34,9 +34,10 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
         binding();
 
         Bundle bundle = getIntent().getExtras();
-        mIdTrayek = bundle.getInt("idTrayek");
+        mChosenTrayek = bundle.getParcelable("trayek");
 
-        new WaktuAsyncTask(this).execute(Trayek.BASE_PATH + Trayek.JSON_WAKTU + mIdTrayek);
+
+        new WaktuAsyncTask(this).execute(Trayek.BASE_PATH + Trayek.JSON_WAKTU + mChosenTrayek.getmIdTrayek());
 
         setTitle("Waktu Keberangkatan");
     }
@@ -50,7 +51,6 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
         public WaktuAsyncTask(Context context) {
             this.context = context;
         }
-
 
 
         @Override
@@ -137,7 +137,7 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             Intent intent = new Intent(mContext, IsiDataActivity.class);
-            intent.putExtra("idTrayek", mIdTrayek);
+            intent.putExtra("trayek", mChosenTrayek);
             intent.putExtra("waktu", mWaktu.getWaktu());
             intent.putExtra("kursi", mWaktu.getJumlah_kursi());
             mContext.startActivity(intent);

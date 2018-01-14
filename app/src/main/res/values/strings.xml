@@ -15,4 +15,10 @@
 
     <!--toast-->
     <string name="toast_main_menu">Anda telah berada di menu utama..</string>
+    <string name="hint_nama">Nama</string>
+    <string name="hint_nomor_ktp">Nomor Ktp</string>
+    <string name="hint_nomor_telepon">Nomor Telepon</string>
+    <string name="hint_nomor_rekening">Nomor Rekening</string>
+    <string name="tanda_minus">-</string>
+    <string name="tanda_plus">+</string>
 </resources>
