@@ -1,9 +1,11 @@
 package com.programmerbaper.jabarjakartatravel.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import com.programmerbaper.jabarjakartatravel.R;
 import com.programmerbaper.jabarjakartatravel.entities.Trayek;
+import com.programmerbaper.jabarjakartatravel.entities.Waktu;
 import com.programmerbaper.jabarjakartatravel.networking.QueryUtils;
 
 import org.json.JSONArray;
@@ -20,11 +23,8 @@ import org.json.JSONObject;
 public class PilihWaktuKursiActivity extends AppCompatActivity {
 
     private int mIdTrayek;
+    private Waktu[] mWaktus;
     private String LOG_TAG = PilihWaktuKursiActivity.class.getName();
-    private int[] mKursi = new int[4];
-    private ProgressBar mLoading6, mLoading10, mLoading2, mLoading630;
-    private TextView mKursi6, mKursi10, mKursi2, mKursi630;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         mIdTrayek = bundle.getInt("idTrayek");
-        Log.v("cik", mIdTrayek + "");
+
         new WaktuAsyncTask(this).execute(Trayek.BASE_PATH + Trayek.JSON_WAKTU + mIdTrayek);
 
         setTitle("Waktu Keberangkatan");
@@ -45,11 +45,13 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
     private class WaktuAsyncTask extends AsyncTask<String, Void, String> {
 
 
-        private Context mContext;
+        private Context context;
 
-        WaktuAsyncTask(Context mContext) {
-            this.mContext = mContext;
+        public WaktuAsyncTask(Context context) {
+            this.context = context;
         }
+
+
 
         @Override
         protected String doInBackground(String... urls) {
@@ -58,11 +60,18 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
                 return null;
             }
 
+
             try {
                 JSONArray rootArray = new JSONArray(QueryUtils.fetchResponse(urls[0]));
                 for (int i = 0; i < rootArray.length(); i++) {
                     JSONObject object = rootArray.getJSONObject(i);
-                    mKursi[i] = object.getInt("kursi_tersedia");
+
+                    String waktu = object.getString("waktu");
+                    int kursi_tersedia = object.getInt("kursi_tersedia");
+
+                    mWaktus[i].setWaktu(waktu);
+                    mWaktus[i].setJumlah_kursi(kursi_tersedia);
+
                 }
 
             } catch (JSONException e) {
@@ -76,42 +85,64 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String response) {
 
-            mLoading2.setVisibility(View.GONE);
-            mLoading10.setVisibility(View.GONE);
-            mLoading6.setVisibility(View.GONE);
-            mLoading630.setVisibility(View.GONE);
 
-            mKursi6.setVisibility(View.VISIBLE);
-            mKursi6.setText(mKursi[0] + " Kursi Tersedia");
+            for (Waktu waktuNow : mWaktus) {
 
+                waktuNow.getProgressBar().setVisibility(View.GONE);
+                waktuNow.getTxtKursi().setVisibility(View.VISIBLE);
+                waktuNow.getTxtKursi().setText(waktuNow.getJumlah_kursi() + " Kursi Tersedia");
+                waktuNow.getTxtTulisan().setText(waktuNow.getWaktu());
+                waktuNow.getCardView().setOnClickListener(new CardListener(waktuNow, context));
 
-            mKursi10.setVisibility(View.VISIBLE);
-            mKursi10.setText(mKursi[1] + " Kursi Tersedia");
-
-
-            mKursi2.setVisibility(View.VISIBLE);
-            mKursi2.setText(mKursi[2] + " Kursi Tersedia");
-
-
-            mKursi630.setVisibility(View.VISIBLE);
-            mKursi630.setText(mKursi[3] + " Kursi Tersedia");
-
-
+            }
         }
 
     }
 
     private void binding() {
 
-        mLoading2 = findViewById(R.id.loading2);
-        mLoading10 = findViewById(R.id.loading10);
-        mLoading6 = findViewById(R.id.loading6);
-        mLoading630 = findViewById(R.id.loading630);
+        mWaktus = null;
+        mWaktus = new Waktu[4];
 
-        mKursi2 = findViewById(R.id.kursi2);
-        mKursi10 = findViewById(R.id.kursi10);
-        mKursi6 = findViewById(R.id.kursi6);
-        mKursi630 = findViewById(R.id.kursi630);
+        mWaktus[0] = new Waktu((ProgressBar) findViewById(R.id.loading0),
+                (CardView) findViewById(R.id.card0),
+                (TextView) findViewById(R.id.kursi0), (TextView) findViewById(R.id.tulisan0));
+
+        mWaktus[1] = new Waktu((ProgressBar) findViewById(R.id.loading1),
+                (CardView) findViewById(R.id.card1),
+                (TextView) findViewById(R.id.kursi1), (TextView) findViewById(R.id.tulisan1));
+
+        mWaktus[2] = new Waktu((ProgressBar) findViewById(R.id.loading2),
+                (CardView) findViewById(R.id.card2),
+                (TextView) findViewById(R.id.kursi2), (TextView) findViewById(R.id.tulisan2));
+
+        mWaktus[3] = new Waktu((ProgressBar) findViewById(R.id.loading3),
+                (CardView) findViewById(R.id.card3),
+                (TextView) findViewById(R.id.kursi3), (TextView) findViewById(R.id.tulisan3));
+
+
+    }
+
+    private class CardListener implements View.OnClickListener {
+
+        private Waktu mWaktu;
+        private Context mContext;
+
+        CardListener(Waktu mWaktu, Context mContext) {
+            this.mWaktu = mWaktu;
+            this.mContext = mContext;
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(mContext, IsiDataActivity.class);
+            intent.putExtra("idTrayek", mIdTrayek);
+            intent.putExtra("waktu", mWaktu.getWaktu());
+            intent.putExtra("kursi", mWaktu.getJumlah_kursi());
+            mContext.startActivity(intent);
+
+        }
     }
 
 }

@@ -14,6 +14,7 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card0"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -36,15 +37,15 @@
                     android:src="@drawable/enam" />
 
                 <TextView
+                    android:id="@+id/tulisan0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="06:00"
                     android:textAlignment="center"
                     android:textSize="15sp" />
 
                 <ProgressBar
-                    android:id="@+id/loading6"
+                    android:id="@+id/loading0"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
@@ -52,11 +53,10 @@
                     android:elevation="4dp" />
 
                 <TextView
-                    android:id="@+id/kursi6"
+                    android:id="@+id/kursi0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="12 Kursi Tersedia"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
@@ -68,6 +68,7 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -90,15 +91,15 @@
                     android:src="@drawable/sepuluh" />
 
                 <TextView
+                    android:id="@+id/tulisan1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="10:00"
                     android:textAlignment="center"
                     android:textSize="15sp" />
 
                 <ProgressBar
-                    android:id="@+id/loading10"
+                    android:id="@+id/loading1"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
@@ -106,11 +107,10 @@
                     android:elevation="4dp" />
 
                 <TextView
-                    android:id="@+id/kursi10"
+                    android:id="@+id/kursi1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="12 Kursi Tersedia"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
@@ -129,6 +129,7 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -151,10 +152,10 @@
                     android:src="@drawable/dua" />
 
                 <TextView
+                    android:id="@+id/tulisan2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="14:00"
                     android:textAlignment="center"
                     android:textSize="15sp" />
 
@@ -171,7 +172,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="12 Kursi Tersedia"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
@@ -182,6 +182,7 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -204,15 +205,15 @@
                     android:src="@drawable/setjuh" />
 
                 <TextView
+                    android:id="@+id/tulisan3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="18:30"
                     android:textAlignment="center"
                     android:textSize="15sp" />
 
                 <ProgressBar
-                    android:id="@+id/loading630"
+                    android:id="@+id/loading3"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
@@ -220,11 +221,10 @@
                     android:elevation="4dp" />
 
                 <TextView
-                    android:id="@+id/kursi630"
+                    android:id="@+id/kursi3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="12 Kursi Tersedia"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"

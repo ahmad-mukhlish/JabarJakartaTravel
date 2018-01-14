@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,6 +28,9 @@
         <activity
             android:name=".activities.AboutActivity"
             android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.IsiDataActivity"
+            android:parentActivityName=".activities.PilihWaktuKursiActivity" />
     </application>
 
 </manifest>

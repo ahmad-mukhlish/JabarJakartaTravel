@@ -85,7 +85,6 @@ public class TrayekRecycleAdapter extends RecyclerView.Adapter<TrayekRecycleAdap
             Trayek clickedTrayek = mTrayeks.get(mPosition);
             Intent intent = new Intent(mContext, PilihWaktuKursiActivity.class);
             intent.putExtra("idTrayek", clickedTrayek.getmIdTrayek());
-            Log.v("cik",clickedTrayek.getmIdTrayek()+"") ;
             view.getContext().startActivity(intent);
 
         }
