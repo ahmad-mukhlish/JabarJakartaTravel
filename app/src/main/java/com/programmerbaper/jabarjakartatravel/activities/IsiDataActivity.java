@@ -23,6 +23,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class IsiDataActivity extends AppCompatActivity {
 
     private String LOG_TAG = IsiDataActivity.class.getName();
@@ -37,7 +43,6 @@ public class IsiDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_isi_data);
-
 
         getBundle();
         setTitle("Isi Data Transaksi");
@@ -158,9 +163,7 @@ public class IsiDataActivity extends AppCompatActivity {
                 if (!(mNama.isEmpty() || mKtp.length() != 16
                         || mTelp.length() < 14 || mRekening.length() < 8)) {
 
-                    //TODO SEND THE DATA TO DATABASE HERE
-                    Toast.makeText(getBaseContext(), "Sip...", Toast.LENGTH_SHORT).show();
-
+                    new TransaksiAsyncTask().execute(Trayek.BASE_PATH + Trayek.JSON_TRANSAKSI);
 
                 } else {
                     Toast.makeText(getBaseContext(), "Masih ada field yang belum valid...", Toast.LENGTH_SHORT).show();
@@ -240,5 +243,81 @@ public class IsiDataActivity extends AppCompatActivity {
 
     }
 
+    private String sqlFormatDate(SimpleDateFormat sdf, String input) {
+
+        Date d = null;
+        try {
+            d = sdf.parse(input);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        sdf.applyPattern("yyyy-MM-dd");
+        return sdf.format(d);
+
+
+    }
+
+    private class TransaksiAsyncTask extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+
+            try {
+                Log.v(LOG_TAG, QueryUtils.postWithHttp(QueryUtils.parseStringLinkToURL(urls[0]), createJsonMessage()));
+            } catch (IOException e) {
+                Log.e(LOG_TAG, "Error when post with http", e);
+            }
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String response) {
+            Toast.makeText(getBaseContext(), "Pesanan Anda telah dikirim", Toast.LENGTH_SHORT).show();
+        }
+
+
+        private String createJsonMessage() {
+
+            JSONObject jsonObject = new JSONObject();
+
+            try {
+
+//                        "nama": "Ahmad",
+//                        "ktp": "4321432143214321",
+//                        "telp": "089510580775",
+//                        "rek": "44444444",
+//                        "jadwal": 1,
+//                        "tanggal": "2015-07-01",
+//                        "kursi" : 2
+
+                jsonObject.accumulate("nama", mNama);
+                jsonObject.accumulate("ktp", mKtp);
+                jsonObject.accumulate("telp", mTelp);
+                jsonObject.accumulate("rek", mRekening);
+                jsonObject.accumulate("jadwal", mJadwal);
+                jsonObject.accumulate("tanggal",
+                        sqlFormatDate(new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("in", "ID")),
+                                TrayekRecycleAdapter.mTanggal
+                        ));
+                jsonObject.accumulate("kursi", mJumlahKursi);
+
+
+            } catch (JSONException e) {
+                Log.e(LOG_TAG, "Error when create JSON message", e);
+            }
+
+            return jsonObject.toString();
+
+        }
+
+    }
 
 }
