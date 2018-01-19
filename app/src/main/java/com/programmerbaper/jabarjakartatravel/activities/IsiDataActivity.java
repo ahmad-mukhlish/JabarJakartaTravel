@@ -18,12 +18,17 @@ import com.programmerbaper.jabarjakartatravel.entities.Trayek;
 import com.programmerbaper.jabarjakartatravel.entities.Waktu;
 import com.programmerbaper.jabarjakartatravel.networking.QueryUtils;
 import com.redmadrobot.inputmask.MaskedTextChangedListener;
+import com.redmadrobot.inputmask.helper.Mask;
+import com.redmadrobot.inputmask.model.CaretString;
+import com.slmyldz.random.Randoms;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,6 +42,8 @@ public class IsiDataActivity extends AppCompatActivity {
     private String mWaktu, mNama, mKtp, mTelp, mRekening;
     private boolean mBack = false;
     private Button mPesan;
+
+    public static int mKode;
 
 
     @Override
@@ -59,6 +66,10 @@ public class IsiDataActivity extends AppCompatActivity {
 
         TextView jam = findViewById(R.id.jam);
         jam.setText(mWaktu);
+
+        TextView kode = findViewById(R.id.kode);
+        mKode = Randoms.Integer(0, 999999999);
+        kode.setText(mask(generateKode(mKode)));
 
         final TextView tersedia = findViewById(R.id.tersedia);
         tersedia.setText(mDiambil + " dari " + mJumlahKursi);
@@ -269,7 +280,13 @@ public class IsiDataActivity extends AppCompatActivity {
             }
 
             try {
-                Log.v(LOG_TAG, QueryUtils.postWithHttp(QueryUtils.parseStringLinkToURL(urls[0]), createJsonMessage()));
+
+                boolean gagal = QueryUtils.postWithHttp(QueryUtils.parseStringLinkToURL(urls[0]), createJsonMessage()).equals("ada yang salah");
+
+                while (gagal) {
+                    gagal = QueryUtils.postWithHttp(QueryUtils.parseStringLinkToURL(urls[0]), createJsonMessage()).equals("ada yang salah");
+                }
+
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error when post with http", e);
             }
@@ -280,6 +297,7 @@ public class IsiDataActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String response) {
+            //TODO INTENT GO TO CaraBayarActivity
             Toast.makeText(getBaseContext(), "Pesanan Anda telah dikirim", Toast.LENGTH_SHORT).show();
         }
 
@@ -289,15 +307,7 @@ public class IsiDataActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject();
 
             try {
-
-//                        "nama": "Ahmad",
-//                        "ktp": "4321432143214321",
-//                        "telp": "089510580775",
-//                        "rek": "44444444",
-//                        "jadwal": 1,
-//                        "tanggal": "2015-07-01",
-//                        "kursi" : 2
-
+                jsonObject.accumulate("id", generateKode(mKode));
                 jsonObject.accumulate("nama", mNama);
                 jsonObject.accumulate("ktp", mKtp);
                 jsonObject.accumulate("telp", mTelp);
@@ -307,7 +317,7 @@ public class IsiDataActivity extends AppCompatActivity {
                         sqlFormatDate(new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("in", "ID")),
                                 TrayekRecycleAdapter.mTanggal
                         ));
-                jsonObject.accumulate("kursi", mJumlahKursi);
+                jsonObject.accumulate("kursi", mDiambil);
 
 
             } catch (JSONException e) {
@@ -320,4 +330,43 @@ public class IsiDataActivity extends AppCompatActivity {
 
     }
 
+    private String generateKode(int kode) {
+
+        String hasil = "";
+
+        if (kode < 1000000000 && kode > 99999999)
+            hasil += kode;
+        else if (kode < 100000000 && kode > 9999999)
+            hasil += "0" + kode;
+        else if (kode < 10000000 && kode > 999999)
+            hasil += "00" + kode;
+        else if (kode < 1000000 && kode > 99999)
+            hasil += "000" + kode;
+        else if (kode < 100000 && kode > 9999)
+            hasil += "0000" + kode;
+        else if (kode < 10000 && kode > 999)
+            hasil += "00000" + kode;
+        else if (kode < 1000 && kode > 99)
+            hasil += "000000" + kode;
+        else if (kode < 100 && kode > 9)
+            hasil += "0000000" + kode;
+        else
+            hasil += "00000000" + kode;
+
+
+        return hasil;
+    }
+
+    private String mask(String input) {
+        final Mask mask = new Mask("[000]-[000]-[000]");
+        final Mask.Result result = mask.apply(
+                new CaretString(
+                        input,
+                        input.length()
+                ),
+                false
+        );
+
+        return result.getFormattedText().getString();
+    }
 }
