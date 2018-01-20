@@ -1,6 +1,7 @@
 package com.programmerbaper.jabarjakartatravel.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -37,13 +38,15 @@ import java.util.Locale;
 public class IsiDataActivity extends AppCompatActivity {
 
     private String LOG_TAG = IsiDataActivity.class.getName();
-    private Trayek mChosenTrayek;
-    private int mJumlahKursi, mDiambil = 1, mJadwal;
+
+    private int mJumlahKursi, mJadwal;
     private String mWaktu, mNama, mKtp, mTelp, mRekening;
     private boolean mBack = false;
+
     private Button mPesan;
 
-    public static int mKode;
+    public static int mKode, mDiambil = 1;
+    public static Trayek mChosenTrayek;
 
 
     @Override
@@ -297,7 +300,7 @@ public class IsiDataActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String response) {
-            //TODO INTENT GO TO CaraBayarActivity
+            startActivity(new Intent(new Intent(getBaseContext(), CaraBayarActivity.class)));
             Toast.makeText(getBaseContext(), "Pesanan Anda telah dikirim", Toast.LENGTH_SHORT).show();
         }
 
