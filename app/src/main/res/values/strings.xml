@@ -15,11 +15,40 @@
 
     <!--toast-->
     <string name="toast_main_menu">Anda telah berada di menu utama..</string>
+
+    <!--hints-->
     <string name="hint_nama">Nama</string>
     <string name="hint_nomor_ktp">Nomor Ktp</string>
     <string name="hint_nomor_telepon">Nomor Telepon</string>
     <string name="hint_nomor_rekening">Nomor Rekening</string>
-    <string name="tanda_minus">-</string>
-    <string name="tanda_plus">+</string>
+
+    <!--buttons-->
+    <string name="button_tanda_minus">-</string>
+    <string name="button_tanda_plus">+</string>
     <string name="button_pesan">Pesan</string>
+
+    <!--bank bca-->
+    <string name="header_bca">ATM BCA</string>
+    <string name="bca_1">Masukan kartu ATM BCA Anda beserta dengan PIN seperti biasa.</string>
+    <string name="bca_2">Pilih menu TRANSFER dan klik BCA Virtual Akun.</string>
+    <string name="bca_3">Masukkan kode perusahaan Jabar Jakarta Travel : 38821 lalu masukkan nomor ID transaksi (pojok kiri atas halaman ini). Contoh : 38821123456789.</string>
+    <string name="bca_4">Masukkan jumlah nominal yang dibayarkan (pojok kanan atas halaman ini).</string>
+    <string name="bca_5">Ikuti instruksi yang tertera hingga transaksi selesai.</string>
+    <string name="bca_6" />
+    <string name="bca_7" />
+    <string name="bca_8" />
+    <string name="bca_9" />
+
+    <!--bank mandiri-->
+    <string name="header_mandiri">ATM Mandiri</string>
+    <string name="mandiri_1">Masukan Kartu ATM Mandiri beserta PIN Anda</string>
+    <string name="mandiri_2">Pilih menu Pembayaran / Pembelian (Payment / Purchase).</string>
+    <string name="mandiri_3">Pilih menu Lainnya (Others).</string>
+    <string name="mandiri_4">Pilih menu Lainnya (Others).</string>
+    <string name="mandiri_5">Pilih menu Multipayment.</string>
+    <string name="mandiri_6">Masukkan kode perusahaan Jabar Jakarta Travel 38821.</string>
+    <string name="mandiri_7">Masukkan nomor ID transaksi (pojok kiri atas halaman).</string>
+    <string name="mandiri_8">Masukkan jumlah nominal yang dibayarkan (pojok kanan atas halaman ini).</string>
+    <string name="mandiri_9">Ikuti instruksi yang tertera hingga transaksi selesai.</string>
+
 </resources>

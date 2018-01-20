@@ -259,7 +259,7 @@
                     android:layout_alignParentEnd="true"
                     android:background="@color/colorAccent"
                     android:elevation="4dp"
-                    android:text="@string/tanda_minus"
+                    android:text="@string/button_tanda_minus"
                     android:textColor="#FFFFFF"
                     android:textSize="25sp" />
 
@@ -271,7 +271,7 @@
                     android:layout_toStartOf="@id/minus"
                     android:background="@color/colorAccent"
                     android:elevation="4dp"
-                    android:text="@string/tanda_plus"
+                    android:text="@string/button_tanda_plus"
                     android:textColor="#FFFFFF"
                     android:textSize="25sp" />
 

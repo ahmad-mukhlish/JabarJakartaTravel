@@ -31,17 +31,17 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:text="ID : 123-456-789"
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/nominal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="Rp. 2.400.000"
                         android:textColor="#000000" />
 
 
@@ -147,43 +147,76 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="ATM BCA"
+                        android:text="@string/header_bca"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/bank_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Masukan kartu ATM BCA Anda beserta dengan PIN seperti biasa." />
+                        android:text="@string/bca_1" />
 
                     <TextView
+                        android:id="@+id/bank_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Pilih menu TRANSFER dan klik BCA Virtual Akun." />
+                        android:text="@string/bca_2" />
 
                     <TextView
+                        android:id="@+id/bank_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Masukkan kode perusahaan Jabar Jakarta Travel : 38821 lalu masukkan nomor id transaksi (pojok kiri atas halaman ini). Contoh : 38821123456789." />
+                        android:text="@string/bca_3" />
 
                     <TextView
+                        android:id="@+id/bank_4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Masukkan jumlah nominal yang dibayarkan (pojok kanan atas halaman ini)." />
+                        android:text="@string/bca_4" />
 
                     <TextView
+                        android:id="@+id/bank_5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Ikuti instruksi yang tertera hingga transaksi selesai." />
+                        android:text="@string/bca_5" />
+
+                    <TextView
+                        android:id="@+id/bank_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:id="@+id/bank_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/bank_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/bank_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:visibility="gone"/>
 
 
                 </LinearLayout>
@@ -193,6 +226,7 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/selanjutnya"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary"

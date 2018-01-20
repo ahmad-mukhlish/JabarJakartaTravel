@@ -333,7 +333,7 @@ public class IsiDataActivity extends AppCompatActivity {
 
     }
 
-    private String generateKode(int kode) {
+    public static String generateKode(int kode) {
 
         String hasil = "";
 
@@ -360,7 +360,7 @@ public class IsiDataActivity extends AppCompatActivity {
         return hasil;
     }
 
-    private String mask(String input) {
+    public static String mask(String input) {
         final Mask mask = new Mask("[000]-[000]-[000]");
         final Mask.Result result = mask.apply(
                 new CaretString(
@@ -372,4 +372,6 @@ public class IsiDataActivity extends AppCompatActivity {
 
         return result.getFormattedText().getString();
     }
+
+
 }
