@@ -5,14 +5,14 @@ import android.os.Bundle;
 
 import com.programmerbaper.jabarjakartatravel.R;
 
-public class Pengecekan extends AppCompatActivity {
+public class CekKodeTiketActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pengecekan);
+        setContentView(R.layout.activity_cek_kode_tiket);
 
-        setTitle("Pengecekan");
+        setTitle("Cek Kode Tiket");
 
     }
 }

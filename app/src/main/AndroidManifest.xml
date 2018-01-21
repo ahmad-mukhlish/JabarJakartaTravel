@@ -16,11 +16,6 @@
             android:name=".activities.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.PilihWaktuKursiActivity"
@@ -29,8 +24,14 @@
             android:name=".activities.AboutActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.IsiDataActivity" />
-        <activity android:name=".activities.CaraBayarActivity"/>
-        <activity android:name=".activities.Pengecekan"/>
+        <activity android:name=".activities.CaraBayarActivity" />
+        <activity android:name=".activities.CekKodeTiketActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

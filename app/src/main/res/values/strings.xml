@@ -8,6 +8,7 @@
 
     <!--labels-->
     <string name="label_no_internet_connection">Tidak ada koneksi internet..</string>
+    <string name="label_kode_tiket_klik_tombol_cek_tiket">Kode Tiket : Silakan klik tombol cek tiket </string>
 
     <!--drawers-->
     <string name="drawer_about_us">About Us</string>
@@ -21,11 +22,16 @@
     <string name="hint_nomor_ktp">Nomor Ktp</string>
     <string name="hint_nomor_telepon">Nomor Telepon</string>
     <string name="hint_nomor_rekening">Nomor Rekening</string>
+    <string name="hint_id_transaksi">ID Transaksi</string>
+
 
     <!--buttons-->
     <string name="button_tanda_minus">-</string>
     <string name="button_tanda_plus">+</string>
     <string name="button_pesan">Pesan</string>
+    <string name="button_cek_kode_tiket">Cek Tiket</string>
+    <string name="button_ambil_tiket_baru">Ambil Tiket Baru</string>
+    <string name="button_hubungi_call_center">Hubungi Call Center</string>
 
     <!--bank bca-->
     <string name="header_bca">ATM BCA</string>

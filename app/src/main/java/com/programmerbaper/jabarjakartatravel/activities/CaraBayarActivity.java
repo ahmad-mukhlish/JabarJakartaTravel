@@ -64,7 +64,7 @@ public class CaraBayarActivity extends AppCompatActivity {
         selanjutnya.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CaraBayarActivity.this, Pengecekan.class));
+                startActivity(new Intent(CaraBayarActivity.this, CekKodeTiketActivity.class));
             }
         });
 
