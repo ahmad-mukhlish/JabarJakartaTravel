@@ -36,11 +36,12 @@ public class IsiDataActivity extends AppCompatActivity {
     private String LOG_TAG = IsiDataActivity.class.getName();
 
     private int mJumlahKursi, mJadwal;
-    private String mWaktu, mNama, mKtp, mTelp, mRekening;
+    private String mWaktu, mNama, mTelp, mRekening;
     private boolean mBack = false;
 
     private Button mPesan;
 
+    public static String mKtp ;
     public static int mKode, mDiambil = 1;
     public static Trayek mChosenTrayek;
 
@@ -103,7 +104,22 @@ public class IsiDataActivity extends AppCompatActivity {
         final EditText nama = findViewById(R.id.nama);
         final EditText nomorKtp = findViewById(R.id.nomor_ktp);
 
+        final MaskedTextChangedListener ktpListener = new MaskedTextChangedListener(
+                "[0000]-[0000]-[0000]-[0000]",
+                true,
+                nomorKtp,
+                null,
+                new MaskedTextChangedListener.ValueListener() {
+                    @Override
+                    public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue) {
+                        Log.d(MainActivity.class.getSimpleName(), extractedValue);
+                        Log.d(MainActivity.class.getSimpleName(), String.valueOf(maskFilled));
+                    }
+                }
+        );
 
+        nomorKtp.addTextChangedListener(ktpListener);
+        nomorKtp.setOnFocusChangeListener(ktpListener);
 
 
         final EditText nomorTelp = findViewById(R.id.telp);
@@ -281,7 +297,9 @@ public class IsiDataActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String response) {
-            startActivity(new Intent(new Intent(getBaseContext(), CaraBayarActivity.class)));
+            Intent intent = new Intent(new Intent(getBaseContext(), CaraBayarActivity.class));
+            intent.putExtra("shortcut", false);
+            startActivity(intent);
             Toast.makeText(getBaseContext(), "Pesanan Anda telah dikirim", Toast.LENGTH_SHORT).show();
         }
 

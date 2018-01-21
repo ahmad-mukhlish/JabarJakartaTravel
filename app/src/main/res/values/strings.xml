@@ -11,8 +11,11 @@
     <string name="label_kode_tiket_klik_tombol_cek_tiket">Kode Tiket : Silakan klik tombol cek tiket </string>
 
     <!--drawers-->
-    <string name="drawer_about_us">About Us</string>
     <string name="drawer_developed_by">Developed by The Force Squad</string>
+    <string name="drawer_about_us">About Us</string>
+    <string name="drawer_cek">Cek Kode Tiket</string>
+    <string name="drawer_cara_bayar">Cara Bayar</string>
+
 
     <!--toast-->
     <string name="toast_main_menu">Anda telah berada di menu utama..</string>
@@ -45,6 +48,9 @@
     <string name="bca_8" />
     <string name="bca_9" />
 
+    <string name="bca_3_shortcut">Masukkan kode perusahaan Jabar Jakarta Travel : 38821 lalu masukkan nomor ID transaksi. Contoh : 38821123456789.</string>
+    <string name="bca_4_shortcut">Masukkan jumlah nominal yang dibayarkan.</string>
+
     <!--bank mandiri-->
     <string name="header_mandiri">ATM Mandiri</string>
     <string name="mandiri_1">Masukan Kartu ATM Mandiri beserta PIN Anda</string>
@@ -53,8 +59,11 @@
     <string name="mandiri_4">Pilih menu Lainnya (Others).</string>
     <string name="mandiri_5">Pilih menu Multipayment.</string>
     <string name="mandiri_6">Masukkan kode perusahaan Jabar Jakarta Travel 38821.</string>
-    <string name="mandiri_7">Masukkan nomor ID transaksi (pojok kiri atas halaman).</string>
+    <string name="mandiri_7">Masukkan nomor ID transaksi (pojok kiri atas halaman ini).</string>
     <string name="mandiri_8">Masukkan jumlah nominal yang dibayarkan (pojok kanan atas halaman ini).</string>
     <string name="mandiri_9">Ikuti instruksi yang tertera hingga transaksi selesai.</string>
+
+    <string name="mandiri_7_shortcut">Masukkan nomor ID transaksi.</string>
+    <string name="mandiri_8_shortcut">Masukkan jumlah nominal yang dibayarkan.</string>
 
 </resources>

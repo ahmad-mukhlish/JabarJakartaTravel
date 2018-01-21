@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }, 3000);
 
 
-
     }
 
     @Override
@@ -140,6 +139,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 withName(R.string.drawer_about_us)
                 .withIcon(R.mipmap.about_us);
 
+        PrimaryDrawerItem check = new PrimaryDrawerItem().
+                withIdentifier(1).
+                withName(R.string.drawer_cek)
+                .withIcon(R.mipmap.ok);
+
+        PrimaryDrawerItem help = new PrimaryDrawerItem().
+                withIdentifier(1).
+                withName(R.string.drawer_cara_bayar)
+                .withIcon(R.mipmap.help);
+
         mDrawer = new DrawerBuilder()
                 .withActivity(this)
                 .withHeader(R.layout.drawer_header)
@@ -147,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 .withSavedInstance(savedInstanceState)
                 .withToolbar(mToolBar)
                 .withSelectedItem(-1)
-                .addDrawerItems(aboutUs, new DividerDrawerItem()
+                .addDrawerItems(check, help, aboutUs, new DividerDrawerItem()
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -155,10 +164,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         switch (position) {
 
                             case 1: {
-                                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                Intent intent = new Intent(MainActivity.this, CekKodeTiketActivity.class);
+                                intent.putExtra("shortcut", true);
+                                startActivity(intent);
                                 break;
                             }
 
+                            case 2: {
+                                Intent intent = new Intent(MainActivity.this, CaraBayarActivity.class);
+                                intent.putExtra("shortcut", true);
+                                startActivity(intent);
+                                break;
+                            }
+
+                            case 3: {
+                                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                break;
+                            }
 
                         }
 

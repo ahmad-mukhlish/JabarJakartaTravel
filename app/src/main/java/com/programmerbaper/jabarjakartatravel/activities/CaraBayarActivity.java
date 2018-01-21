@@ -3,6 +3,7 @@ package com.programmerbaper.jabarjakartatravel.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -19,6 +20,8 @@ public class CaraBayarActivity extends AppCompatActivity {
     private TextView mHeader, mBank1, mBank2, mBank3, mBank4,
             mBank5, mBank6, mBank7, mBank8, mBank9;
 
+    private boolean mShorcut = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +29,23 @@ public class CaraBayarActivity extends AppCompatActivity {
 
         setTitle("Cara Bayar");
 
+
+        Bundle bundle = getIntent().getExtras();
+        mShorcut = bundle.getBoolean("shortcut");
+
+
         bindingTexts();
+        setBCA();
+        CardView cardHolder = findViewById(R.id.cardHolder);
 
-        TextView id = findViewById(R.id.id);
-        id.setText(IsiDataActivity.mask(IsiDataActivity.generateKode(IsiDataActivity.mKode)));
-
-        TextView nominal = findViewById(R.id.nominal);
-        nominal.setText((Trayek.formatter(IsiDataActivity.mDiambil * IsiDataActivity.mChosenTrayek.getmTarif() + "")));
+        if (!mShorcut) {
+            TextView id = findViewById(R.id.id);
+            id.setText(IsiDataActivity.mask(IsiDataActivity.generateKode(IsiDataActivity.mKode)));
+            TextView nominal = findViewById(R.id.nominal);
+            nominal.setText((Trayek.formatter(IsiDataActivity.mDiambil * IsiDataActivity.mChosenTrayek.getmTarif() + "")));
+        } else {
+            cardHolder.setVisibility(View.GONE);
+        }
 
 
         final RadioButton radioBCA = findViewById(R.id.radio_bca);
@@ -64,17 +77,15 @@ public class CaraBayarActivity extends AppCompatActivity {
         selanjutnya.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CaraBayarActivity.this, CekKodeTiketActivity.class));
+
+                Intent intent = new Intent(CaraBayarActivity.this, CekKodeTiketActivity.class);
+                intent.putExtra("shortcut", mShorcut);
+                startActivity(intent);
             }
         });
 
     }
 
-
-    @Override
-    public void onBackPressed() {
-
-    }
 
     private void bindingTexts() {
 
@@ -93,8 +104,15 @@ public class CaraBayarActivity extends AppCompatActivity {
         mTextBCAs[0] = getString(R.string.header_bca);
         mTextBCAs[1] = getString(R.string.bca_1);
         mTextBCAs[2] = getString(R.string.bca_2);
-        mTextBCAs[3] = getString(R.string.bca_3);
-        mTextBCAs[4] = getString(R.string.bca_4);
+
+        if (!mShorcut) {
+            mTextBCAs[3] = getString(R.string.bca_3);
+            mTextBCAs[4] = getString(R.string.bca_4);
+        } else {
+            mTextBCAs[3] = getString(R.string.bca_3_shortcut);
+            mTextBCAs[4] = getString(R.string.bca_4_shortcut);
+        }
+
         mTextBCAs[5] = getString(R.string.bca_5);
         mTextBCAs[6] = getString(R.string.bca_6);
         mTextBCAs[7] = getString(R.string.bca_7);
@@ -108,8 +126,15 @@ public class CaraBayarActivity extends AppCompatActivity {
         mTextMandiris[4] = getString(R.string.mandiri_4);
         mTextMandiris[5] = getString(R.string.mandiri_5);
         mTextMandiris[6] = getString(R.string.mandiri_6);
-        mTextMandiris[7] = getString(R.string.mandiri_7);
-        mTextMandiris[8] = getString(R.string.mandiri_8);
+
+        if (!mShorcut) {
+            mTextMandiris[7] = getString(R.string.mandiri_7);
+            mTextMandiris[8] = getString(R.string.mandiri_8);
+        } else {
+            mTextMandiris[7] = getString(R.string.mandiri_7_shortcut);
+            mTextMandiris[8] = getString(R.string.mandiri_8_shortcut);
+        }
+
         mTextMandiris[9] = getString(R.string.mandiri_9);
     }
 

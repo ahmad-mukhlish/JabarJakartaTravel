@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.programmerbaper.jabarjakartatravel.R;
 import com.programmerbaper.jabarjakartatravel.entities.Trayek;
@@ -136,11 +137,15 @@ public class PilihWaktuKursiActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            Intent intent = new Intent(mContext, IsiDataActivity.class);
-            intent.putExtra("trayek", mChosenTrayek);
-            intent.putExtra("waktu", mWaktu.getWaktu());
-            intent.putExtra("kursi", mWaktu.getJumlah_kursi());
-            mContext.startActivity(intent);
+            if (mWaktu.getJumlah_kursi() > 0) {
+                Intent intent = new Intent(mContext, IsiDataActivity.class);
+                intent.putExtra("trayek", mChosenTrayek);
+                intent.putExtra("waktu", mWaktu.getWaktu());
+                intent.putExtra("kursi", mWaktu.getJumlah_kursi());
+                mContext.startActivity(intent);
+            } else {
+                Toast.makeText(getBaseContext(),"Kursi telah habis..", Toast.LENGTH_SHORT).show(); ;
+            }
 
         }
     }

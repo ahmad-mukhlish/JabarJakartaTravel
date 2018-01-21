@@ -33,11 +33,16 @@ public class CekKodeTiketActivity extends AppCompatActivity {
     private TextView mTiket;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
+    private boolean mShorcut = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cek_kode_tiket);
+
+        Bundle bundle = getIntent().getExtras();
+        mShorcut = bundle.getBoolean("shortcut");
 
         mSwipeRefreshLayout = findViewById(R.id.swipe);
         mTiket = findViewById(R.id.tiket);
@@ -77,6 +82,12 @@ public class CekKodeTiketActivity extends AppCompatActivity {
 
         nomorKtp.addTextChangedListener(ktpListener);
         nomorKtp.setOnFocusChangeListener(ktpListener);
+
+        if (!mShorcut) {
+            idTransaksi.setText(IsiDataActivity.mask(IsiDataActivity.generateKode(IsiDataActivity.mKode)));
+            nomorKtp.setText(IsiDataActivity.mKtp);
+
+        }
 
 
         Button ambil = findViewById(R.id.ambil);
