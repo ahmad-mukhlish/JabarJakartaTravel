@@ -156,7 +156,7 @@
                     android:src="@mipmap/ktp" />
 
                 <EditText
-                    android:id="@+id/ktp"
+                    android:id="@+id/nomor_ktp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="0123456789 -."

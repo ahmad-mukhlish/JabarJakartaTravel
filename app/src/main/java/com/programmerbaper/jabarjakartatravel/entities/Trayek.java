@@ -23,6 +23,9 @@ public class Trayek implements Parcelable {
     public static final String JSON_JADWAL1 = "server.php?operasi=jadwal&kode_trayek=";
     public static final String JSON_JADWAL2 = "&waktu=";
     public static final String JSON_TRANSAKSI = "server.php?operasi=transaksi";
+    public static final String JSON_CEK1 = "server.php?operasi=cek&id_transaksi=";
+    public static final String JSON_CEK2 = "&no_ktp=";
+
 
 
     public Trayek(int mIdTrayek, String mNama, int mTarif) {

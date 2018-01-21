@@ -1,6 +1,5 @@
 package com.programmerbaper.jabarjakartatravel.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import com.programmerbaper.jabarjakartatravel.R;
 import com.programmerbaper.jabarjakartatravel.adapters.TrayekRecycleAdapter;
 import com.programmerbaper.jabarjakartatravel.entities.Trayek;
-import com.programmerbaper.jabarjakartatravel.entities.Waktu;
 import com.programmerbaper.jabarjakartatravel.networking.QueryUtils;
 import com.redmadrobot.inputmask.MaskedTextChangedListener;
 import com.redmadrobot.inputmask.helper.Mask;
@@ -28,8 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -105,25 +101,10 @@ public class IsiDataActivity extends AppCompatActivity {
         });
 
         final EditText nama = findViewById(R.id.nama);
-        final EditText nomorKtp = findViewById(R.id.ktp);
+        final EditText nomorKtp = findViewById(R.id.nomor_ktp);
 
 
-        final MaskedTextChangedListener ktpListener = new MaskedTextChangedListener(
-                "[0000]-[0000]-[0000]-[0000]",
-                true,
-                nomorKtp,
-                null,
-                new MaskedTextChangedListener.ValueListener() {
-                    @Override
-                    public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue) {
-                        Log.d(MainActivity.class.getSimpleName(), extractedValue);
-                        Log.d(MainActivity.class.getSimpleName(), String.valueOf(maskFilled));
-                    }
-                }
-        );
 
-        nomorKtp.addTextChangedListener(ktpListener);
-        nomorKtp.setOnFocusChangeListener(ktpListener);
 
         final EditText nomorTelp = findViewById(R.id.telp);
 
@@ -196,7 +177,7 @@ public class IsiDataActivity extends AppCompatActivity {
 
     }
 
-    private String unmask(String input) {
+    public static String unmask(String input) {
 
         String hasil = "";
         String[] splits = input.split("-");
