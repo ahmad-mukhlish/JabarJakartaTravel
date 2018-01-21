@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mTrayek = null;
+
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -64,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mToolBar = findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolBar);
         mToolBar.setVisibility(View.GONE);
-
 
         if (isConnected) {
             LoaderManager loaderManager = getLoaderManager();
@@ -195,8 +196,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mTrayek = null;
+        super.onDestroy();
     }
 
     @Override
