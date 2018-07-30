@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.programmerbaper.jabarjakartatravel.R;
-import com.programmerbaper.jabarjakartatravel.activities.PilihWaktuKursiActivity;
+import com.programmerbaper.jabarjakartatravel.activities.IsiDataActivity;
 import com.programmerbaper.jabarjakartatravel.entities.Trayek;
 
 import java.text.SimpleDateFormat;
@@ -86,8 +86,10 @@ public class TrayekRecycleAdapter extends RecyclerView.Adapter<TrayekRecycleAdap
         public void onClick(View view) {
 
             Trayek clickedTrayek = mTrayeks.get(mPosition);
-            Intent intent = new Intent(mContext, PilihWaktuKursiActivity.class);
+
+            Intent intent = new Intent(mContext, IsiDataActivity.class);
             intent.putExtra("trayek", clickedTrayek);
+            Log.v("coba",clickedTrayek.getmTarif()+"") ;
             view.getContext().startActivity(intent);
 
         }

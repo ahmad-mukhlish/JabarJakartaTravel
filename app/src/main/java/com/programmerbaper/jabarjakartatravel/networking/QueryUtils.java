@@ -138,16 +138,18 @@ public class QueryUtils {
 
         try {
 
-            JSONArray root = new JSONArray(jason);
+            JSONObject root = new JSONObject(jason);
+            JSONArray data = root.getJSONArray("data");
+            for (int i = 0; i < data.length(); i++) {
 
-            for (int i = 0; i < root.length(); i++) {
+                JSONObject trayekNow = data.getJSONObject(i) ;
 
-                JSONObject trayekNow = root.getJSONObject(i);
-                int idTrayek = Integer.parseInt(trayekNow.getString("id_trayek"));
-                String nama = trayekNow.getString("nama_trayek");
-                int tarif = Integer.parseInt(trayekNow.getString("tarif"));
+                int idTrayek = Integer.parseInt(trayekNow.getString("id"));
+                String nama = trayekNow.getString("name");
+                int tarif = Integer.parseInt(trayekNow.getString("price"));
+                String waktuBerangkat = trayekNow.getString("departure_at");
 
-                Trayek currentProduk = new Trayek(idTrayek, nama, tarif);
+                Trayek currentProduk = new Trayek(idTrayek, nama, tarif, waktuBerangkat);
                 listProduks.add(currentProduk);
             }
 

@@ -1,14 +1,13 @@
 package com.programmerbaper.jabarjakartatravel.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +15,6 @@ import com.programmerbaper.jabarjakartatravel.R;
 import com.programmerbaper.jabarjakartatravel.adapters.TrayekRecycleAdapter;
 import com.programmerbaper.jabarjakartatravel.entities.Trayek;
 import com.programmerbaper.jabarjakartatravel.networking.QueryUtils;
-import com.redmadrobot.inputmask.MaskedTextChangedListener;
-import com.redmadrobot.inputmask.helper.Mask;
-import com.redmadrobot.inputmask.model.CaretString;
 import com.slmyldz.random.Randoms;
 
 import org.json.JSONArray;
@@ -29,19 +25,15 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class IsiDataActivity extends AppCompatActivity {
 
     private String LOG_TAG = IsiDataActivity.class.getName();
 
-    private int mJumlahKursi, mJadwal;
-    private String mWaktu, mNama, mTelp, mRekening;
     private boolean mBack = false;
 
     private Button mPesan;
 
-    public static String mKtp ;
     public static int mKode, mDiambil = 1;
     public static Trayek mChosenTrayek;
 
@@ -52,10 +44,7 @@ public class IsiDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_isi_data);
 
         getBundle();
-        setTitle("Isi Data Transaksi");
-
-        new JadwalAsyncTask().execute(Trayek.BASE_PATH + Trayek.JSON_JADWAL1 + mChosenTrayek.getmIdTrayek()
-                + Trayek.JSON_JADWAL2 + mWaktu);
+        setTitle("Pilih Jumlah Kursi");
 
 
         TextView trayek = findViewById(R.id.trayek);
@@ -65,25 +54,31 @@ public class IsiDataActivity extends AppCompatActivity {
         tanggal.setText(TrayekRecycleAdapter.mTanggal);
 
         TextView jam = findViewById(R.id.jam);
-        jam.setText(mWaktu);
+        jam.setText(mChosenTrayek.getmWaktuBerangkat().substring(11));
 
         TextView kode = findViewById(R.id.kode);
-        mKode = Randoms.Integer(0, 999999999);
-        kode.setText(mask(generateKode(mKode)));
+        mKode = Randoms.Integer(0, 999);
+        kode.setText(generateKode(mKode));
+
+        final TextView harga = findViewById(R.id.harga);
+        harga.setText("Rp. " + (mChosenTrayek.getmTarif() + mKode) + "");
+
+        TextView nama = findViewById(R.id.nama);
+        nama.setText(LoginActivity.user.getName());
+
+        TextView email = findViewById(R.id.email);
+        email.setText(LoginActivity.user.getEmail());
 
         final TextView tersedia = findViewById(R.id.tersedia);
-        tersedia.setText(mDiambil + " dari " + mJumlahKursi);
+        tersedia.setText(mDiambil + "");
 
         Button plus = findViewById(R.id.plus);
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDiambil == mJumlahKursi) {
-                    Toast.makeText(getBaseContext(), "Jumlah kursi sudah maksimal", Toast.LENGTH_SHORT).show();
-                } else {
-                    mDiambil++;
-                    tersedia.setText(mDiambil + " dari " + mJumlahKursi);
-                }
+                mDiambil++;
+                harga.setText(("Rp. " + (mChosenTrayek.getmTarif() * mDiambil + mKode) + ""));
+                tersedia.setText(mDiambil + "");
             }
         });
 
@@ -96,89 +91,18 @@ public class IsiDataActivity extends AppCompatActivity {
 
                 } else {
                     mDiambil--;
-                    tersedia.setText(mDiambil + " dari " + mJumlahKursi);
+                    harga.setText(("Rp. " + (mChosenTrayek.getmTarif() * mDiambil + mKode) + ""));
+                    tersedia.setText(mDiambil + "");
                 }
             }
         });
-
-        final EditText nama = findViewById(R.id.nama);
-        final EditText nomorKtp = findViewById(R.id.nomor_ktp);
-
-        final MaskedTextChangedListener ktpListener = new MaskedTextChangedListener(
-                "[0000]-[0000]-[0000]-[0000]",
-                true,
-                nomorKtp,
-                null,
-                new MaskedTextChangedListener.ValueListener() {
-                    @Override
-                    public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue) {
-                        Log.d(MainActivity.class.getSimpleName(), extractedValue);
-                        Log.d(MainActivity.class.getSimpleName(), String.valueOf(maskFilled));
-                    }
-                }
-        );
-
-        nomorKtp.addTextChangedListener(ktpListener);
-        nomorKtp.setOnFocusChangeListener(ktpListener);
-
-
-        final EditText nomorTelp = findViewById(R.id.telp);
-
-        final MaskedTextChangedListener telpListener = new MaskedTextChangedListener(
-                "+62[000]-[0000]-[00000]",
-                true,
-                nomorTelp,
-                null,
-                new MaskedTextChangedListener.ValueListener() {
-                    @Override
-                    public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue) {
-                        Log.d(MainActivity.class.getSimpleName(), extractedValue);
-                        Log.d(MainActivity.class.getSimpleName(), String.valueOf(maskFilled));
-                    }
-                }
-        );
-
-        nomorTelp.addTextChangedListener(telpListener);
-        nomorTelp.setOnFocusChangeListener(telpListener);
-
-
-        final EditText nomorRek = findViewById(R.id.rekening);
-        final MaskedTextChangedListener rekListener = new MaskedTextChangedListener(
-                "[0000]-[0000]-[00000]",
-                true,
-                nomorRek,
-                null,
-                new MaskedTextChangedListener.ValueListener() {
-                    @Override
-                    public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue) {
-                        Log.d(MainActivity.class.getSimpleName(), extractedValue);
-                        Log.d(MainActivity.class.getSimpleName(), String.valueOf(maskFilled));
-                    }
-                }
-        );
-
-        nomorRek.addTextChangedListener(rekListener);
-        nomorRek.setOnFocusChangeListener(rekListener);
 
 
         mPesan = findViewById(R.id.pesan);
         mPesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                mNama = nama.getText().toString();
-                mKtp = unmask(nomorKtp.getText().toString());
-                mTelp = unmask(nomorTelp.getText().toString());
-                mRekening = unmask(nomorRek.getText().toString());
-
-                if (!(mNama.isEmpty() || mKtp.length() != 16
-                        || mTelp.length() < 14 || mRekening.length() < 8)) {
-
-                    new TransaksiAsyncTask().execute(Trayek.BASE_PATH + Trayek.JSON_TRANSAKSI);
-
-                } else {
-                    Toast.makeText(getBaseContext(), "Masih ada field yang belum valid...", Toast.LENGTH_SHORT).show();
-                }
+                new IsiAsyncTask(getBaseContext()).execute(Trayek.BASE_PATH + Trayek.POST_TRANSACTION);
             }
         });
 
@@ -188,23 +112,8 @@ public class IsiDataActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         mChosenTrayek = bundle.getParcelable("trayek");
-        mWaktu = bundle.getString("waktu");
-        mJumlahKursi = bundle.getInt("kursi");
-
     }
 
-    public static String unmask(String input) {
-
-        String hasil = "";
-        String[] splits = input.split("-");
-        for (String splitsNow : splits) {
-
-            hasil += splitsNow;
-
-        }
-
-        return hasil;
-    }
 
     @Override
     public void onBackPressed() {
@@ -217,42 +126,6 @@ public class IsiDataActivity extends AppCompatActivity {
 
     }
 
-
-    private class JadwalAsyncTask extends AsyncTask<String, Void, String> {
-
-
-        public JadwalAsyncTask() {
-        }
-
-        @Override
-        protected String doInBackground(String... urls) {
-
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-
-
-            try {
-                JSONArray rootArray = new JSONArray(QueryUtils.fetchResponse(urls[0]));
-                for (int i = 0; i < rootArray.length(); i++) {
-                    JSONObject object = rootArray.getJSONObject(i);
-                    mJadwal = object.getInt("id_jadwal");
-                }
-
-            } catch (JSONException e) {
-                Log.e(LOG_TAG, "Problem parsing the JSON results", e);
-            }
-
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(String response) {
-            mPesan.setVisibility(View.VISIBLE);
-        }
-
-    }
 
     private String sqlFormatDate(SimpleDateFormat sdf, String input) {
 
@@ -269,8 +142,31 @@ public class IsiDataActivity extends AppCompatActivity {
 
     }
 
-    private class TransaksiAsyncTask extends AsyncTask<String, Void, String> {
 
+    public static String generateKode(int kode) {
+
+        String hasil = "";
+
+
+        if (kode < 1000 && kode > 99)
+            hasil += kode;
+        else if (kode < 100 && kode > 9)
+            hasil += "0" + kode;
+        else
+            hasil += "00" + kode;
+
+
+        return hasil;
+    }
+
+    private class IsiAsyncTask extends AsyncTask<String, Void, String> {
+
+        private Context mContext;
+        private Boolean status = false;
+
+        IsiAsyncTask(Context mContext) {
+            this.mContext = mContext;
+        }
 
         @Override
         protected String doInBackground(String... urls) {
@@ -280,97 +176,60 @@ public class IsiDataActivity extends AppCompatActivity {
             }
 
             try {
-
-                boolean gagal = QueryUtils.postWithHttp(QueryUtils.parseStringLinkToURL(urls[0]), createJsonMessage()).equals("ada yang salah");
-
-                while (gagal) {
-                    gagal = QueryUtils.postWithHttp(QueryUtils.parseStringLinkToURL(urls[0]), createJsonMessage()).equals("ada yang salah");
-                }
-
+                JSONObject jsonObject = new JSONObject(QueryUtils.postWithHttp(QueryUtils.parseStringLinkToURL(urls[0]), createJsonMessage()));
+                status = jsonObject.getBoolean("status");
             } catch (IOException e) {
-                Log.e(LOG_TAG, "Error when post with http", e);
+                e.printStackTrace();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
             return null;
+
+
         }
 
 
         @Override
         protected void onPostExecute(String response) {
-            Intent intent = new Intent(new Intent(getBaseContext(), CaraBayarActivity.class));
-            intent.putExtra("shortcut", false);
-            startActivity(intent);
-            Toast.makeText(getBaseContext(), "Pesanan Anda telah dikirim", Toast.LENGTH_SHORT).show();
+            if (status) {
+                Toast.makeText(getBaseContext(), "Transaksi Sukses", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(IsiDataActivity.this, CaraBayarActivity.class);
+                intent.putExtra("shortcut", false);
+                intent.putExtra("kode", mKode);
+                intent.putExtra("harga", mChosenTrayek.getmTarif());
+                intent.putExtra("jumlah", mDiambil);
+                startActivity(intent);
+            } else
+                Toast.makeText(getBaseContext(), "Terjadi kesalahan ^_^", Toast.LENGTH_SHORT).show();
         }
 
 
         private String createJsonMessage() {
 
-            JSONObject jsonObject = new JSONObject();
+            JSONObject root = new JSONObject();
+            JSONObject trayek = new JSONObject();
+            JSONArray data = new JSONArray();
 
             try {
-                jsonObject.accumulate("id", generateKode(mKode));
-                jsonObject.accumulate("nama", mNama);
-                jsonObject.accumulate("ktp", mKtp);
-                jsonObject.accumulate("telp", mTelp);
-                jsonObject.accumulate("rek", mRekening);
-                jsonObject.accumulate("jadwal", mJadwal);
-                jsonObject.accumulate("tanggal",
-                        sqlFormatDate(new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("in", "ID")),
-                                TrayekRecycleAdapter.mTanggal
-                        ));
-                jsonObject.accumulate("kursi", mDiambil);
+                trayek.accumulate("id", mChosenTrayek.getmIdTrayek());
+                trayek.accumulate("cart", mDiambil);
 
+                data.put(trayek);
+
+                root.accumulate("user_id", LoginActivity.user.getId());
+                root.accumulate("data", data);
+                root.accumulate("secret", mKode + "");
 
             } catch (JSONException e) {
-                Log.e(LOG_TAG, "Error when create JSON message", e);
+                Log.e("Kelas Login", "Error when create JSON message", e);
             }
 
-            return jsonObject.toString();
+            return root.toString();
 
         }
-
     }
-
-    public static String generateKode(int kode) {
-
-        String hasil = "";
-
-        if (kode < 1000000000 && kode > 99999999)
-            hasil += kode;
-        else if (kode < 100000000 && kode > 9999999)
-            hasil += "0" + kode;
-        else if (kode < 10000000 && kode > 999999)
-            hasil += "00" + kode;
-        else if (kode < 1000000 && kode > 99999)
-            hasil += "000" + kode;
-        else if (kode < 100000 && kode > 9999)
-            hasil += "0000" + kode;
-        else if (kode < 10000 && kode > 999)
-            hasil += "00000" + kode;
-        else if (kode < 1000 && kode > 99)
-            hasil += "000000" + kode;
-        else if (kode < 100 && kode > 9)
-            hasil += "0000000" + kode;
-        else
-            hasil += "00000000" + kode;
-
-
-        return hasil;
-    }
-
-    public static String mask(String input) {
-        final Mask mask = new Mask("[000]-[000]-[000]");
-        final Mask.Result result = mask.apply(
-                new CaretString(
-                        input,
-                        input.length()
-                ),
-                false
-        );
-
-        return result.getFormattedText().getString();
-    }
-
 
 }

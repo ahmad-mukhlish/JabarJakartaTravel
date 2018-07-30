@@ -68,7 +68,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/bus" />
 
         <ProgressBar
             android:id="@+id/progress"

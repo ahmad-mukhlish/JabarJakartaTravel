@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -113,16 +112,44 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="6dp"
+                    android:src="@drawable/ic_price_tag_usd_512" />
+
+                <TextView
+                    android:id="@+id/harga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    tools:text="123456" />
+
+
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="16dp"
-                android:background="#a3ffab40" />
+                android:background="@color/colorAccent" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -130,63 +157,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginStart="2dp"
                     android:src="@mipmap/nama" />
 
-                <EditText
+                <TextView
                     android:id="@+id/nama"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_nama"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:src="@mipmap/ktp" />
-
-                <EditText
-                    android:id="@+id/nomor_ktp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:digits="0123456789 -."
-                    android:hint="@string/hint_nomor_ktp"
-                    android:inputType="number"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:src="@mipmap/telp" />
-
-                <EditText
-                    android:id="@+id/telp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:digits="0123456789 -.+"
-                    android:hint="@string/hint_nomor_telepon"
-                    android:inputType="number"
+                    android:text="123456"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -194,27 +172,29 @@
             </LinearLayout>
 
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_markunread" />
+
+                <TextView
+                    android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:src="@mipmap/rekening" />
-
-                <EditText
-                    android:id="@+id/rekening"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:digits="0123456789 -."
-                    android:hint="@string/hint_nomor_rekening"
-                    android:inputType="number"
+                    android:layout_marginStart="5dp"
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:text="123456" />
 
 
             </LinearLayout>
@@ -225,7 +205,8 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="16dp"
-                android:background="#a3ffab40" />
+                android:background="@color/colorAccent" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -250,13 +231,14 @@
                     android:layout_toEndOf="@id/seatImage"
                     android:textColor="#000000"
                     android:textSize="16sp"
-                    tools:text="2 dari 8 kursi tersedia" />
+                    tools:text="1 kursi terpesan" />
 
                 <Button
                     android:id="@+id/minus"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@id/plus"
                     android:background="@color/colorAccent"
                     android:elevation="4dp"
                     android:text="@string/button_tanda_minus"
@@ -267,8 +249,7 @@
                     android:id="@+id/plus"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@id/minus"
+                    android:layout_alignParentEnd="true"
                     android:background="@color/colorAccent"
                     android:elevation="4dp"
                     android:text="@string/button_tanda_plus"
@@ -286,12 +267,12 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="4dp"
-        android:background="@color/primary_dark"
+        android:background="@color/colorPrimaryDark"
         android:elevation="8dp"
         android:text="@string/button_pesan"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 
 </LinearLayout>

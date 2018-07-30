@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -27,13 +25,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.programmerbaper.jabarjakartatravel.R;
 import com.programmerbaper.jabarjakartatravel.adapters.TrayekTabAdapter;
 import com.programmerbaper.jabarjakartatravel.entities.Trayek;
-import com.programmerbaper.jabarjakartatravel.entities.Waktu;
-import com.programmerbaper.jabarjakartatravel.networking.QueryUtils;
 import com.programmerbaper.jabarjakartatravel.networking.TrayekLoader;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -94,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<List<Trayek>> onCreateLoader(int id, Bundle args) {
         if (mTrayek == null) {
-            return new TrayekLoader(this, Trayek.BASE_PATH + Trayek.JSON_TRAYEK);
+            return new TrayekLoader(this, Trayek.BASE_PATH + Trayek.GET_TRAYEK);
         } else
             return null;
     }
@@ -140,15 +132,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 withName(R.string.drawer_about_us)
                 .withIcon(R.mipmap.about_us);
 
-        PrimaryDrawerItem check = new PrimaryDrawerItem().
-                withIdentifier(1).
-                withName(R.string.drawer_cek)
-                .withIcon(R.mipmap.ok);
-
         PrimaryDrawerItem help = new PrimaryDrawerItem().
                 withIdentifier(1).
                 withName(R.string.drawer_cara_bayar)
                 .withIcon(R.mipmap.help);
+
+        PrimaryDrawerItem ticket = new PrimaryDrawerItem().
+                withIdentifier(1).
+                withName(R.string.drawer_ticket)
+                .withIcon(R.drawable.ic_ticket);
+
+        PrimaryDrawerItem logout = new PrimaryDrawerItem().
+                withIdentifier(1).
+                withName(R.string.drawer_logout)
+                .withIcon(R.drawable.ic_logout);
+
+
 
         mDrawer = new DrawerBuilder()
                 .withActivity(this)
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 .withSavedInstance(savedInstanceState)
                 .withToolbar(mToolBar)
                 .withSelectedItem(-1)
-                .addDrawerItems(check, help, aboutUs, new DividerDrawerItem()
+                .addDrawerItems(help, aboutUs, ticket, logout, new DividerDrawerItem()
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -165,21 +164,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         switch (position) {
 
                             case 1: {
-                                Intent intent = new Intent(MainActivity.this, CekKodeTiketActivity.class);
+                                Intent intent = new Intent(MainActivity.this, CaraBayarActivity.class);
                                 intent.putExtra("shortcut", true);
+                                intent.putExtra("kode", 0);
+                                intent.putExtra("harga", 0);
+                                intent.putExtra("jumlah", 0);
                                 startActivity(intent);
                                 break;
                             }
 
                             case 2: {
-                                Intent intent = new Intent(MainActivity.this, CaraBayarActivity.class);
-                                intent.putExtra("shortcut", true);
-                                startActivity(intent);
+                                startActivity(new Intent(MainActivity.this, AboutActivity.class));
                                 break;
                             }
 
                             case 3: {
-                                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                startActivity(new Intent(MainActivity.this, TiketSayaActivity.class));
+                                break;
+                            }
+
+                            case 4: {
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                LoginActivity.user = null ;
                                 break;
                             }
 
@@ -196,8 +202,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     protected void onDestroy() {
-        mTrayek = null;
         super.onDestroy();
+        mTrayek = null;
     }
 
     @Override
@@ -207,6 +213,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         else
             Toast.makeText(this, R.string.toast_main_menu, Toast.LENGTH_SHORT).show();
     }
+
+
 
 
 }

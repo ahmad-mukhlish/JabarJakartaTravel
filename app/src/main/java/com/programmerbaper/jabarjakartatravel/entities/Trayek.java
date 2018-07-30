@@ -15,29 +15,34 @@ public class Trayek implements Parcelable {
     private int mIdTrayek;
     private String mNama;
     private int mTarif;
+    private String mWaktuBerangkat;
 
-    //TODO the link should be understood by the Lecture
-    public static final String BASE_PATH = "http://192.168.1.3/travel/";
-    public static final String JSON_TRAYEK = "server.php?operasi=trayek";
-    public static final String JSON_WAKTU = "server.php?operasi=pilih_waktu&kode_trayek=";
-    public static final String JSON_JADWAL1 = "server.php?operasi=jadwal&kode_trayek=";
-    public static final String JSON_JADWAL2 = "&waktu=";
-    public static final String JSON_TRANSAKSI = "server.php?operasi=transaksi";
-    public static final String JSON_CEK1 = "server.php?operasi=cek&id_transaksi=";
-    public static final String JSON_CEK2 = "&no_ktp=";
-
+    public static final String BASE_PATH = "https://tr4veler.gurisa.com/api/v0/";
+    public static final String GET_TRAYEK = "routes";
+    public static final String POST_REGISTER = "users";
+    public static final String POST_AUTH = "auth/login" ;
+    public static final String POST_TRANSACTION = "transactions" ;
+    public static final String GET_TIKET = "users/";
+    public static final String GET_TIKET_2 = "/details";
 
 
-    public Trayek(int mIdTrayek, String mNama, int mTarif) {
+
+
+
+
+
+    public Trayek(int mIdTrayek, String mNama, int mTarif, String mWaktuBerangkat) {
         this.mIdTrayek = mIdTrayek;
         this.mNama = mNama;
         this.mTarif = mTarif;
+        this.mWaktuBerangkat = mWaktuBerangkat;
     }
 
     protected Trayek(Parcel in) {
         mIdTrayek = in.readInt();
         mNama = in.readString();
         mTarif = in.readInt();
+        mWaktuBerangkat = in.readString();
     }
 
     public static final Creator<Trayek> CREATOR = new Creator<Trayek>() {
@@ -64,6 +69,10 @@ public class Trayek implements Parcelable {
         return mTarif;
     }
 
+    public String getmWaktuBerangkat() {
+        return mWaktuBerangkat;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -74,6 +83,7 @@ public class Trayek implements Parcelable {
         dest.writeInt(mIdTrayek);
         dest.writeString(mNama);
         dest.writeInt(mTarif);
+        dest.writeString(mWaktuBerangkat);
     }
 
     public static String formatter(String input) {
@@ -81,7 +91,7 @@ public class Trayek implements Parcelable {
             DecimalFormatSymbols symbol = new DecimalFormatSymbols();
             symbol.setGroupingSeparator('.');
 
-            DecimalFormat format = new DecimalFormat(" Rp ###,###");
+            DecimalFormat format = new DecimalFormat("Rp ###,###");
             format.setDecimalFormatSymbols(symbol);
 
             return format.format(Double.parseDouble(input));
@@ -90,7 +100,6 @@ public class Trayek implements Parcelable {
         }
 
     }
-
 
 
 }

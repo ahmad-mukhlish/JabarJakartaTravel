@@ -11,7 +11,7 @@
     <string name="label_kode_tiket_klik_tombol_cek_tiket">Kode Tiket : Silakan klik tombol cek tiket </string>
 
     <!--drawers-->
-    <string name="drawer_developed_by">Developed by The Force Squad</string>
+    <string name="drawer_developed_by">Developed by The Deadliners Squad</string>
     <string name="drawer_about_us">About Us</string>
     <string name="drawer_cek">Cek Kode Tiket</string>
     <string name="drawer_cara_bayar">Cara Bayar</string>
@@ -21,7 +21,7 @@
     <string name="toast_main_menu">Anda telah berada di menu utama..</string>
 
     <!--hints-->
-    <string name="hint_nama">Nama</string>
+    <string name="hint_nama">Atas Nama</string>
     <string name="hint_nomor_ktp">Nomor Ktp</string>
     <string name="hint_nomor_telepon">Nomor Telepon</string>
     <string name="hint_nomor_rekening">Nomor Rekening</string>
@@ -40,7 +40,7 @@
     <string name="header_bca">ATM BCA</string>
     <string name="bca_1">Masukan kartu ATM BCA Anda beserta dengan PIN seperti biasa.</string>
     <string name="bca_2">Pilih menu TRANSFER dan klik BCA Virtual Akun.</string>
-    <string name="bca_3">Masukkan kode perusahaan Jabar Jakarta Travel : 38821 lalu masukkan nomor ID transaksi (pojok kiri atas halaman ini). Contoh : 38821123456789.</string>
+    <string name="bca_3">Masukkan kode perusahaan Jabar Jakarta Travel : 38821 lalu masukkan nomor invoice (pojok kiri atas) Contoh : 571 .</string>
     <string name="bca_4">Masukkan jumlah nominal yang dibayarkan (pojok kanan atas halaman ini).</string>
     <string name="bca_5">Ikuti instruksi yang tertera hingga transaksi selesai.</string>
     <string name="bca_6" />
@@ -59,11 +59,39 @@
     <string name="mandiri_4">Pilih menu Lainnya (Others).</string>
     <string name="mandiri_5">Pilih menu Multipayment.</string>
     <string name="mandiri_6">Masukkan kode perusahaan Jabar Jakarta Travel 38821.</string>
-    <string name="mandiri_7">Masukkan nomor ID transaksi (pojok kiri atas halaman ini).</string>
+    <string name="mandiri_7">Masukkan nomor invoice (pojok kiri atas halaman ini).</string>
     <string name="mandiri_8">Masukkan jumlah nominal yang dibayarkan (pojok kanan atas halaman ini).</string>
     <string name="mandiri_9">Ikuti instruksi yang tertera hingga transaksi selesai.</string>
 
     <string name="mandiri_7_shortcut">Masukkan nomor ID transaksi.</string>
     <string name="mandiri_8_shortcut">Masukkan jumlah nominal yang dibayarkan.</string>
+    <string name="title_activity_login">LoginActivity</string>
 
+
+    <string name="btn_start">Start</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_pass">Forgot Password</string>
+    <string name="forgot_pass2">Forgot Password ?</string>
+    <string name="send_email_text">Please enter the email you used at the time of registration to get the
+ password reset instructions.</string>
+    <string name="send_pass">Send Password</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="username">Username</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="dont_have_acc">Do not Have Account?</string>
+    <string name="task_add">Add Task</string>
+    <string name="task_name">Task Name</string>
+    <string name="insert_date">Insert Date</string>
+    <string name="category">Category</string>
+    <string name="add">Add</string>
+    <string name="fokus">Everyday focus increase your productivity even habit</string>
+    <string name="placeholder_time">00.00</string>
+    <string name="placeholder_focus_time">1.50</string>
+    <string name="placeholder_date">1 Jan</string>
+    <string name="drawer_logout">Logout</string>
+    <string name="drawer_ticket">Tiket Saya</string>
+    <string name="belum_ada_tiket">Belum Ada Tiket</string>
 </resources>

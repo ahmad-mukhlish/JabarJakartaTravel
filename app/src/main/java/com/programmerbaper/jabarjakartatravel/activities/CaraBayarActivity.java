@@ -1,8 +1,8 @@
 package com.programmerbaper.jabarjakartatravel.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +21,9 @@ public class CaraBayarActivity extends AppCompatActivity {
             mBank5, mBank6, mBank7, mBank8, mBank9;
 
     private boolean mShorcut = false;
+    private int mKode;
+    private int mHarga;
+    private int mJumlah ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,9 @@ public class CaraBayarActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         mShorcut = bundle.getBoolean("shortcut");
+        mKode = bundle.getInt("kode");
+        mHarga = bundle.getInt("harga");
+        mJumlah = bundle.getInt("jumlah") ;
 
 
         bindingTexts();
@@ -40,9 +46,9 @@ public class CaraBayarActivity extends AppCompatActivity {
 
         if (!mShorcut) {
             TextView id = findViewById(R.id.id);
-            id.setText(IsiDataActivity.mask(IsiDataActivity.generateKode(IsiDataActivity.mKode)));
+            id.setText(IsiDataActivity.generateKode(mKode));
             TextView nominal = findViewById(R.id.nominal);
-            nominal.setText((Trayek.formatter(IsiDataActivity.mDiambil * IsiDataActivity.mChosenTrayek.getmTarif() + "")));
+            nominal.setText((Trayek.formatter((mJumlah * mHarga + mKode) + "")));
         } else {
             cardHolder.setVisibility(View.GONE);
         }
@@ -78,7 +84,7 @@ public class CaraBayarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(CaraBayarActivity.this, CekKodeTiketActivity.class);
+                Intent intent = new Intent(CaraBayarActivity.this, MainActivity.class);
                 intent.putExtra("shortcut", mShorcut);
                 startActivity(intent);
             }
